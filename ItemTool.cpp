@@ -1,5 +1,4 @@
 #include <iostream>
-
 using namespace std;
 
 enum MAIN_MENU {
@@ -68,9 +67,8 @@ void AddItem(_tagItem* pWeaponStore, _tagItem* pArmorStore) {
 			return;
 		else if (iStore < 1 || iStore > 3)
 			continue;
-
-		--iStore;
-		break;
+		else
+			break;
 	}
 	int iItemLevel = 0;
 	while (true) {
@@ -106,8 +104,12 @@ void AddItem(_tagItem* pWeaponStore, _tagItem* pArmorStore) {
 	}
 	cout << "이름 : ";
 	cin.getline(pItem->strName, NAME_SIZE);
+	cin.clear();
+	cin.ignore(1024, '\n');
 	cout << "종류 : ";
 	cin.getline(pItem->strTypeName, NAME_SIZE);
+	cin.clear();
+	cin.ignore(1024, '\n');
 	//스탯을 입력받는다.
 	cout << "최소능력치 :";
 	pItem->iMin = InputInt();
@@ -119,6 +121,8 @@ void AddItem(_tagItem* pWeaponStore, _tagItem* pArmorStore) {
 	pItem->iSell = InputInt();
 	cout << "설명 :";
 	cin.getline(pItem->strDesc, ITEM_DESC_LENGTH);
+	cin.clear();
+	cin.ignore(1024, '\n');
 }
 
 bool SaveItem(_tagItem *WeaponStore,_tagItem *ArmorStore) {
@@ -147,20 +151,26 @@ bool LoadItem(_tagItem* WeaponStore, _tagItem* ArmorStore) {
 	return false;
 }
 
-void OutputMonster(_tagMonster* pMonsterArr) {
+void OutputItem(_tagItem* WeaponStore, _tagItem* ArmorStore) {
 	system("cls");
-	cout << "======================Monster======================" << endl;
-	for (int i = 0; i < MT_END; i++) {
+	cout << "====================무기상점=====================" << endl;
+	for (int i = 0; i < STORE_WEAPON_MAX; i++) {
+		cout << i + 1 << ". " << WeaponStore[i].strName << endl;
+		cout << "사용가능 직업 : " << WeaponStore[i].strTypeName << endl;
+		cout << "공격력 : " << WeaponStore[i].iMin << " - " << WeaponStore[i].iMax << endl;
+		cout << "설명 : " << WeaponStore[i].strDesc << endl;
+		cout << "가격 : " << WeaponStore[i].iPrice << endl;
+		cout << "==================================================" << endl;
+	}
 
-		cout << "이름 : " << pMonsterArr[i].strName << "\t레벨  " <<
-			pMonsterArr[i].iLevel << endl;
-		cout << "공격력 : " << pMonsterArr[i].iAttackMin << " - " <<
-			pMonsterArr[i].iAttackMax << "\t방어력 : " << pMonsterArr[i].iArmorMin <<
-			" - " << pMonsterArr[i].iArmorMax << endl;
-		cout << "체력 : " << pMonsterArr[i].iHP << " / " << pMonsterArr[i].iHPMax <<
-			"\t마나" << pMonsterArr[i].iMP << " / " << pMonsterArr[i].iMPMax << endl;
-		cout << "획득 경험치 : " << pMonsterArr[i].iExp << "\t획득 골드 : " <<
-			pMonsterArr[i].iGoldMin << " - " << pMonsterArr[i].iGoldMax << endl << endl;
+	cout << "====================방어구상점=====================" << endl;
+	for (int i = 0; i < STORE_ARMOR_MAX; i++) {
+		cout << i + 1 << ". " << ArmorStore[i].strName << endl;
+		cout << "사용가능 직업 : " << ArmorStore[i].strTypeName << endl;
+		cout << "공격력 : " << ArmorStore[i].iMin << " - " << ArmorStore[i].iMax << endl;
+		cout << "설명 : " << ArmorStore[i].strDesc << endl;
+		cout << "가격 : " << ArmorStore[i].iPrice << endl;
+		cout << "==================================================" << endl;
 	}
 	system("pause");
 }
@@ -181,6 +191,7 @@ int main() {
 
 		if (iMenu == MM_EXIT)
 			break;
+
 		switch (iMenu) {
 		case MM_ADD:
 			AddItem(tWeaponStore, tArmorStore);
@@ -189,16 +200,14 @@ int main() {
 			LoadItem(tWeaponStore, tArmorStore);
 			break;
 		case MM_SAVE:
-			SaveMonster(tMonster);
+			SaveItem(tWeaponStore, tArmorStore);
 			break;
 		case MM_OUTPUT:
-			OutputMonster(tMonster);
+			OutputItem(tWeaponStore, tArmorStore);
 			break;
-
 		}
 	}
-
 	//자동저장기능
-	SaveMonster(tMonster);
+	SaveItem(tWeaponStore, tArmorStore);
 	return 0;
 }

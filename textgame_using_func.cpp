@@ -827,6 +827,15 @@ void RunInventory(_tagPlayer* pPlayer) {
 	}
 }
 
+void SetItemList(_tagItem* WeaponStore, _tagItem* ArmorStore) {
+	FILE* pFile = NULL;
+
+	fopen_s(&pFile, "Item.list", "rb");
+
+	fread(WeaponStore, sizeof(_tagItem), STORE_WEAPON_MAX, pFile);
+	fread(ArmorStore, sizeof(_tagItem), STORE_ARMOR_MAX, pFile);
+}
+
 int main() {
 	srand((unsigned int)time(0));
 
@@ -869,19 +878,20 @@ int main() {
 	_tagItem tStoreWeapon[STORE_WEAPON_MAX] = {};
 	_tagItem tStoreArmor[STORE_ARMOR_MAX] = {};
 
-	tStoreWeapon[0] = CreateItem("¸ñ°Ë", IT_WEAPON, 5, 10,
-		1000, 500, "³ª¹«·Î ¸¸µç Ä®");
-	tStoreWeapon[1] = CreateItem("Àå±Ã", IT_WEAPON, 20, 10,
-		7000, 3500, "Â¯Â¯ÇÑ È°");
-	tStoreWeapon[2] = CreateItem("ÁöÆÎÀÌ", IT_WEAPON, 90, 150,
-		30000, 15000, "³ª¹«·Î ¸¸µç ÁöÆÎÀÌ");
+	SetItemList(tStoreWeapon, tStoreArmor);
+	//tStoreWeapon[0] = CreateItem("¸ñ°Ë", IT_WEAPON, 5, 10,
+	//	1000, 500, "³ª¹«·Î ¸¸µç Ä®");
+	//tStoreWeapon[1] = CreateItem("Àå±Ã", IT_WEAPON, 20, 10,
+	//	7000, 3500, "Â¯Â¯ÇÑ È°");
+	//tStoreWeapon[2] = CreateItem("ÁöÆÎÀÌ", IT_WEAPON, 90, 150,
+	//	30000, 15000, "³ª¹«·Î ¸¸µç ÁöÆÎÀÌ");
 
-	tStoreArmor[0] = CreateItem("Ãµ°©¿Ê", IT_ARMOR, 2, 5,
-		1000, 500, "ÃµÀ¸·Î ¸¸µç ÇãÁ¢ÇÑ °©¿Ê");
-	tStoreArmor[1] = CreateItem("°¡Á×°©¿Ê", IT_ARMOR, 10, 20,
-		7000, 3500, "µ¿¹° °¡Á×À¸·Î ¸¸µç Áú±ä °©¿Ê");
-	tStoreArmor[2] = CreateItem("Ç®ÇÃ·¹ÀÌÆ®¾Æ¸Ó", IT_ARMOR, 70, 90,
-		30000, 15000, "°­Ã¶·Î ¸¸µç ÆÇ±Ý°©¿Ê");
+	//tStoreArmor[0] = CreateItem("Ãµ°©¿Ê", IT_ARMOR, 2, 5,
+	//	1000, 500, "ÃµÀ¸·Î ¸¸µç ÇãÁ¢ÇÑ °©¿Ê");
+	//tStoreArmor[1] = CreateItem("°¡Á×°©¿Ê", IT_ARMOR, 10, 20,
+	//	7000, 3500, "µ¿¹° °¡Á×À¸·Î ¸¸µç Áú±ä °©¿Ê");
+	//tStoreArmor[2] = CreateItem("Ç®ÇÃ·¹ÀÌÆ®¾Æ¸Ó", IT_ARMOR, 70, 90,
+	//	30000, 15000, "°­Ã¶·Î ¸¸µç ÆÇ±Ý°©¿Ê");
 
 	bool bLoop = true;
 

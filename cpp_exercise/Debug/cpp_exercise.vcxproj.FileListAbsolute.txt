@@ -1,0 +1,2 @@
+C:\github\cpp_exercise\cpp_exercise\Debug\cpp_exercise.exe
+C:\github\cpp_exercise\cpp_exercise\Debug\cpp_exercise.pdb

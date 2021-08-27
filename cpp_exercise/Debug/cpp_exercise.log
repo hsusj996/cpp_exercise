@@ -1,0 +1,4 @@
+﻿  textgame_using_func.cpp
+C:\github\cpp_exercise\textgame_using_func.cpp(340,12): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\github\cpp_exercise\textgame_using_func.cpp(341,13): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  cpp_exercise.vcxproj -> C:\github\cpp_exercise\cpp_exercise\Debug\cpp_exercise.exe
